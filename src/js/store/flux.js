@@ -1,18 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
 			people: [],
 			
 		},
@@ -54,11 +42,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(err => console.error(err));
 			},
 
-			 
-			
+			 /*
+			 OTRA FORMA USANDO ASYNC/AWAIT
 
-
-
+			 showCharacters: async () => {
+			try {
+				const response = await fetch("https://www.swapi.tech/api/people");
+				const data = await response.json();
+				
+				// Verificar si se recibieron datos de la API
+				if (data.results) {
+					const characters = await Promise.all(data.results.map(async character => {
+						const characterResponse = await fetch(character.url);
+						const characterData = await characterResponse.json();
+						
+						// Si los detalles del personaje contienen una propiedad 'properties',
+						// extraer las propiedades necesarias, de lo contrario, usar los datos sin procesar
+						const characterProperties = 'properties' in characterData ? characterData.properties : characterData;
+						
+						return {
+							...characterProperties,
+							name: character.name
+						};
+					}));
+					
+					setStore({ people: characters });
+				} else {
+					console.error("No se recibieron datos válidos de la API");
+				}
+			} catch (error) {
+				console.error("Error al cargar los personajes:", error);
+			}
+		}
+			 */
 			
 
 			loadSomeData: () => {
@@ -66,20 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			
 		}
 	};
 };

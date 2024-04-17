@@ -15,20 +15,24 @@ export const Characters = () => {
     return (
         <div>
             <h2>Lista de Personajes</h2>
-            <ul>
-                {store.people.map((character, index) => (
-                    <li key={index}>
-                        <h3>{character.name}</h3>
-                        <ul>
-                            {propertiesToShow.map(property => (
-                                <li key={property}>
-                                    <strong>{property}: </strong>{character.result.properties[property]}
-                                </li>
-                            ))}
-                        </ul>
-                    </li>
-                ))}
-            </ul>
+            <div className="row">
+                <div className="card-group overflow-auto">
+                    {store.people.map((character, index) => (
+                        <div className="card col-md-4 mb-3" key={index}>
+                            <div className="card-header">{character.name}</div>
+                            <div className="card-body">
+                                <ul>
+                                    {propertiesToShow.map(property => (
+                                        <li key={property}>
+                                            <strong>{property}: </strong>{character.result.properties[property]}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };
