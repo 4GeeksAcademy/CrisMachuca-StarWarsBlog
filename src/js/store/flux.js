@@ -23,13 +23,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			showCharacters: () => {
-				console.log("Characters desde flux")
 				fetch("https://www.swapi.tech/api/people")
-				.then(res => res.json())
-				.then(data => { setStore({ people: data.results }) })
-				.catch(err => console.error(err))
-
+					.then(res => res.json())
+					.then(data => {
+						// Verificar si se recibieron datos de la API
+						if (data.results) {
+							// Mapear sobre los resultados para obtener los detalles de cada personaje
+							const promises = data.results.map(character =>
+								fetch(character.url)
+									.then(res => res.json())
+									.then(characterData => ({
+										// Si los detalles del personaje contienen una propiedad 'properties',
+										// extraer las propiedades necesarias
+										...('properties' in characterData ? characterData.properties : characterData),
+										// Si no, usar los datos sin procesar
+										name: character.name
+									}))
+							);
+			
+							// Esperar a que todas las promesas se resuelvan
+							Promise.all(promises)
+								.then(characters => {
+									setStore({ people: characters });
+								})
+								.catch(err => console.error(err));
+						} else {
+							console.error("No se recibieron datos válidos de la API");
+						}
+					})
+					.catch(err => console.error(err));
 			},
+
+			 
+			
+
+
+
 			
 
 			loadSomeData: () => {
