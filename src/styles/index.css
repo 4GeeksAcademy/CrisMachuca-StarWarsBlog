@@ -1,3 +1,13 @@
 /* 
     General Styles
 */
+.scrolling-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .card {
+    width: 286px;
+    display: inline-block;
+    margin-right: 10px; /* Espacio entre las tarjetas */
+  }

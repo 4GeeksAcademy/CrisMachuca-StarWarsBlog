@@ -2,34 +2,34 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/index.css";
 
-export const Characters = () => {
+export const Planets = () => {
     const { store, actions } = useContext(Context);
 
     // Cargar los personajes cuando el componente se monte
     useEffect(() => {
-        actions.showCharacters();
+        actions.showPlanets();
     }, [actions]);
 
     // Lista de propiedades a mostrar para cada personaje
-    const propertiesToShow = ["height", "birth_year", "gender"];
+    const propertiesToShow = ["population", "climate", "terrain"];
 
     return (
         
         <div>
-            <h2 style={{color: "red"}}>Lista de Personajes</h2>
+            <h2 style={{color: "red"}}>Lista de Planetas</h2>
             <div className="text-center container">
             <div className="row scrolling-wrapper">
                 
             <div className="col-sm-12">
-                    {store.people.map((character, index) => (
+                    {store.planets.map((planet, index) => (
                         <div className="card" key={index} >
-                            <img src={`https://starwars-visualguide.com/assets/img/characters/${index + 1}.jpg`} className="card-img-top" alt="..."/>
-                            <div className="card-header">{character.name}</div>
+                            <img src={`https://starwars-visualguide.com/assets/img/planets/${index}.jpg`} className="card-img-top" alt="..."/>
+                            <div className="card-header">{planet.name}</div>
                             <div className="card-body">
                                 <ul>
                                     {propertiesToShow.map(property => (
                                         <li key={property}>
-                                            <strong>{property}: </strong>{character.result.properties[property]}
+                                            <strong>{property}: </strong>{planet.result.properties[property]}
                                         </li>
                                     ))}
                                 </ul>
@@ -47,4 +47,4 @@ export const Characters = () => {
     );
 };
 
-export default Characters;
+export default Planets;
