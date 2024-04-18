@@ -11,3 +11,7 @@
     display: inline-block;
     margin-right: 10px; /* Espacio entre las tarjetas */
   }
+
+  ul, li {
+    list-style:none
+}

@@ -33,6 +33,10 @@ export const Characters = () => {
                                         </li>
                                     ))}
                                 </ul>
+                                <div className="buttons display-flex justify-content-between">
+                                    <button className="more btn btn-primary">Learn more!</button>
+                                    <button className="more btn">Favoritos!</button>
+                                </div>
                             </div>
                         </div>
                     ))}
