@@ -11,14 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-
-		
 			
-
 			showCharacters: () => {
 				fetch("https://www.swapi.tech/api/people")
 					.then(res => res.json())
@@ -148,7 +141,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 			}
 		},
 		*/
-		
+		// Función para cargar los datos de la API y almacenarlos en el almacenamiento local
+		loadDataFromAPI: async (key, url) => {
+			try {
+				const localStorageData = localStorage.getItem(key);
+				if (localStorageData) {
+					setStore({ [key]: JSON.parse(localStorageData) });
+				} else {
+					const response = await fetch(url);
+					const data = await response.json();
+					if (data.results) {
+						const items = await Promise.all(data.results.map(async item => {
+							const itemResponse = await fetch(item.url);
+							const itemData = await itemResponse.json();
+							const itemProperties = 'properties' in itemData ? itemData.properties : itemData;
+							return { ...itemProperties, name: item.name };
+						}));
+						localStorage.setItem(key, JSON.stringify(items));
+						setStore({ [key]: items });
+					} else {
+						console.error("No se recibieron datos válidos de la API");
+					}
+				}
+			} catch (error) {
+				console.error("Error al cargar los datos:", error);
+			}
+		},
+
+		// Funciones específicas para cargar datos desde la API y almacenarlos en el almacenamiento local
+		showCharacters: () => {
+			getActions().loadDataFromAPI("people", "https://www.swapi.tech/api/people");
+		},
+		showPlanets: () => {
+			getActions().loadDataFromAPI("planets", "https://www.swapi.tech/api/planets");
+		},
+		showVehicles: () => {
+			getActions().loadDataFromAPI("vehicles", "https://www.swapi.tech/api/vehicles");
+		},
 			
 
 			loadSomeData: () => {

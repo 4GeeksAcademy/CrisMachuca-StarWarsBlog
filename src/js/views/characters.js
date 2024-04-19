@@ -35,7 +35,7 @@ export const Characters = () => {
                                 </ul>
                                 <div className="buttons display-flex justify-content-between">
                                     <button className="more btn btn-primary">Learn more!</button>
-                                    <button className="more btn">Favoritos!</button>
+                                    <button className="more btn btn-warning"><i class="fa-regular fa-heart"></i></button>
                                 </div>
                             </div>
                         </div>
