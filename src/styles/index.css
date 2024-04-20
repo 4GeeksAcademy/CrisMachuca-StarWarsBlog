@@ -6,8 +6,13 @@
 
 
 .layout {
-  background-color: black;
+  background-image: url("https://getwallpapers.com/wallpaper/full/a/0/0/30135.jpg");
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  
 }
+
 
 .navbar {
   background-color: black;
@@ -15,7 +20,7 @@
   font-size: 2em;
   
 }
-H2 {
+h2 {
   font-family: 'Star Wars', sans-serif;
 }
 
