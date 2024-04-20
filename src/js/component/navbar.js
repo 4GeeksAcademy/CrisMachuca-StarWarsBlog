@@ -18,7 +18,7 @@ export const Navbar = () => {
       <ul className="navbar-nav">
         <li className="nav-item">
 		<Link to="/" className="link">
-		<i className="fa-solid fa-house"></i> <span className="ms-1 d-none d-sm-inline">Home</span>
+		<i className="fa-solid fa-house"></i> <span className="ms-1 d-none d-sm-inline">Star Wars</span>
 				</Link>
           
         </li>

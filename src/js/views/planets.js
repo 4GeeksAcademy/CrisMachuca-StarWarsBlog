@@ -54,6 +54,10 @@ export const Planets = () => {
                                                             <li><strong>Climate:</strong> {planet.result.properties.climate || 'N/A'}</li>
                                                             <li><strong>Terrain:</strong> {planet.result.properties.terrain || 'N/A'}</li>
                                                         </ul>
+                                                        <div className="buttons display-flex">
+                                                            <button className="more btn btn-primary m-3">Learn more!</button>
+                                                            <button className="heart btn btn-warning"><i className="fa-regular fa-heart"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             );

@@ -54,6 +54,10 @@ export const Vehicles = () => {
                                                             <li><strong>Manufacturer:</strong> {vehicle.result.properties.manufacturer || 'N/A'}</li>
                                                             <li><strong>Cargo Capacity:</strong> {vehicle.result.properties.cargo_capacity || 'N/A'}</li>
                                                         </ul>
+                                                        <div className="buttons display-flex">
+                                                            <button className="more btn btn-primary m-3">Learn more!</button>
+                                                            <button className="heart btn btn-warning"><i className="fa-regular fa-heart"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             );
